@@ -1,0 +1,28 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Các styles tùy chỉnh của bạn */
+.font-otomanopee {
+    font-family: 'Otomanopee One', sans-serif;
+}
+
+.font-amaranth {
+    font-family: 'Amaranth', sans-serif;
+}
+
+.font-instrument {
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.bg-primary {
+    background-color: #f79576;
+}
+
+.bg-primary-light {
+    background-color: #ffdcc9;
+}
+
+.bg-primary-dark {
+    background-color: #f57c54;
+}
