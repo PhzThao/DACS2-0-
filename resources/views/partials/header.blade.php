@@ -15,7 +15,7 @@
                         <a href="{{ route('home') }}" class="nav-link">Home</a>
                     </li>
                     <li class="relative group">
-                        <a href="{{ route('services.shop') }}" class="nav-link">Shop</a>
+                        <a href="{{ route('about') }}" class="nav-link">About</a>
                         <ul class="absolute left-0 hidden group-hover:block bg-white shadow-lg mt-2 rounded">
                             <li><a href="{{ route('about.team') }}" class="block px-4 py-2 text-black hover:bg-gray-200">Our Team</a></li>
                             <li><a href="{{ route('about.story') }}" class="block px-4 py-2 text-black hover:bg-gray-200">Our Story</a></li>
@@ -73,7 +73,7 @@
                         </a>
                         <!-- Dropdown Menu -->
                         <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-black hover:bg-gray-100">View Profile</a>
+                            <a href="{{ route('user.profile',['id'=>auth()->user()->id]) }}" class="block px-4 py-2 text-black hover:bg-gray-100">View Profile</a>
                             <form action="{{ route('logout') }}" method="POST" class="flex items-center px-4 py-2 text-black hover:bg-gray-100">
                                 @csrf
                                 <button type="submit" class="w-full text-left flex items-center space-x-2">

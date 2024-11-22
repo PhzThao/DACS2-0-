@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class AuthController extends Controller
 {
@@ -19,6 +23,11 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         return view('pages.login');  // Đảm bảo bạn có view 'login' trong resources/views/pages
+    }
+
+    public function showLoginadForm()
+    {
+        return view('pages.loginad');  
     }
 
     // Đăng ký người dùng
@@ -78,4 +87,25 @@ class AuthController extends Controller
         auth()->logout();  // Đăng xuất
         return redirect()->route('login');  // Chuyển hướng đến trang đăng nhập
     }
+
+    public function loginad(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+
+    // Xác thực với model Admin thay vì User
+    if (Auth::guard('admin')->attempt($credentials)) {
+        return redirect()->route('homead');  // Chuyển hướng đến trang chủ sau khi đăng nhập thành công
+    }
+
+    return back()->withErrors([
+        'email' => 'Thông tin đăng nhập không chính xác.',
+    ]);
+}
+
+public function logoutAdmin()
+{
+    Auth::guard('admin')->logout();  // Đăng xuất admin
+    return redirect()->route('loginad');  // Chuyển hướng về trang đăng nhập admin
+}
+
 }

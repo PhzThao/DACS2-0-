@@ -12,7 +12,6 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description'
     ];
 
     /**
@@ -21,5 +20,14 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Accessor for product count (using loaded relation if available).
+     */
+    public function getProductsCountAttribute()
+    {
+        // Sử dụng dữ liệu từ eager loading nếu có
+        return $this->products_count ?? $this->products()->count();
     }
 }

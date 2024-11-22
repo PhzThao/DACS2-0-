@@ -76,6 +76,10 @@
                     Don't have an account? 
                     <a href="{{ route('register') }}" class="text-teal-400 hover:text-teal-300">Register Here</a>
                 </div>
+                <div class="text-center text-gray-200 text-sm">
+                    Are you ADMIN? 
+                    <a href="{{ route('loginad') }}" class="text-teal-400 hover:text-teal-300">Login Here</a>
+                </div>
             </form>
         </div>
     </div>

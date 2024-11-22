@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [  // Thêm guard cho admin
+            'driver' => 'session',
+            'provider' => 'admins',  // Tạo provider cho admin
+        ],
     ],
 
     /*
@@ -69,6 +73,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'admins' => [  // Thêm provider cho admin
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,  // Dùng model Admin
+    ],
     ],
 
     /*

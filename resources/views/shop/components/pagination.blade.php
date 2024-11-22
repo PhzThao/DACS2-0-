@@ -3,4 +3,4 @@
         Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of {{ $products->total() }} results
     </p>
     {{ $products->links() }}
-</div>
+</div>  

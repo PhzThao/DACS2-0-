@@ -18,7 +18,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'avatar',  // Thêm trường avatar nếu có
+        'avatar', 
+        'gender', 'dateofbirth', 'address', 'phone' // Thêm trường avatar nếu có
     ];
 
     // Các trường cần ẩn khi trả về dữ liệu
