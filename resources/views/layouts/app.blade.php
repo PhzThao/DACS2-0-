@@ -24,6 +24,9 @@
     <footer class="relative z-10">
         @include('partials.footer')
     </footer>
+
+    @yield('scripts')
+
 </body>
 
 </html>

@@ -32,36 +32,34 @@
 
   <!-- Doctor Cards -->
   <div class="space-y-4">
-    @foreach ([ 
-      ['name' => "Dr. Hamza Tariq", 'title' => "Senior Surgeon", 'rating' => 4.9, 'fee' => "$12", 'image' => 'images/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5 1.png'],
-      ['name' => "Dr. Alina Fatima", 'title' => "Senior Surgeon", 'rating' => 5.0, 'fee' => "$12", 'image' => 'images/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5 2.png'],
-      ['name' => "Dr. Aisha Malik", 'title' => "Veterinary Specialist", 'rating' => 4.8, 'fee' => "$15", 'image' => 'images/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5 1.png'],
-      ['name' => "Dr. Omar Khan", 'title' => "Pet Nutritionist", 'rating' => 4.7, 'fee' => "$10", 'image' => 'images/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5 2.png']
-    ] as $doctor)
-    <div class="max-w-lg mx-auto flex items-center justify-between bg-white rounded-lg shadow-xl p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
-        <img src="{{ asset($doctor['image']) }}" alt="Doctor's profile picture" class="w-20 h-20 rounded-lg mr-4 transition-transform duration-300 ease-in-out hover:scale-125"> <!-- Added transition and hover effect here -->
-        <div class="flex-grow">
-          <h3 class="text-lg font-semibold text-gray-800">{{ $doctor['name'] }}</h3>
-          <p class="text-sm text-gray-500">{{ $doctor['title'] }}</p>
-          <p class="text-sm text-gray-500"><span class="mr-1">🕒</span>10:30 AM-3:30</p>
-          <p class="text-sm text-gray-500"><span class="mr-1">💲</span>{{ $doctor['fee'] }}</p>
-        </div>
-        <div class="flex items-center">
-          <span class="text-gray-800 font-semibold">{{ $doctor['rating'] }}</span>
-          <span class="text-yellow-500 text-lg ml-1">⭐</span>
-        </div>
-        <button class="ml-4 bg-gray-800 text-white rounded-full p-2 focus:outline-none transform transition-transform hover:scale-110">
-          ➔
-        </button>
+    @foreach ($doctors as $doctor)
+    <a href="{{ route('doctor.profile', ['id' => $doctor->id_doctor]) }}">
+      <div class="max-w-lg mx-auto flex items-center justify-between bg-white rounded-lg shadow-xl p-4 transition-transform transform hover:scale-105 hover:shadow-2xl mb-6">
+          <img src="{{ asset($doctor->doctor_avartar) }}" alt="Doctor's profile picture" class="w-20 h-20 rounded-lg mr-4 transition-transform duration-300 ease-in-out hover:scale-125"> 
+          <div class="flex-grow">
+            <h3 class="text-lg font-semibold text-gray-800">{{ $doctor->name_doctor }}</h3>
+            <p class="text-sm text-gray-500">{{ $doctor->doctor_title }}</p>
+            <p class="text-sm text-gray-500"><span class="mr-1">🕒</span>{{ date('h:i A', strtotime($doctor->start_time)) }} - {{ date('h:i A', strtotime($doctor->end_time)) }}</p>
+            <p class="text-sm text-gray-500"><span class="mr-1">💲</span>${{ $doctor->doctor_booking_price }}</p>
+          </div>
+          <div class="flex items-center">
+            <span class="text-gray-800 font-semibold">{{ $doctor->rating ?? 0 }}</span>
+            <span class="text-yellow-500 text-lg ml-1">⭐</span>
+          </div>
+          <button class="ml-4 bg-gray-800 text-white rounded-full p-2 focus:outline-none transform transition-transform hover:scale-110">
+            ➔
+          </button>
       </div>
+    </a>
     @endforeach
   </div>
 
   <!-- See More Button -->
   <div class="mt-6 text-center">
-    <button class="bg-blue-200 text-blue-800 font-semibold py-3 px-8 rounded-full hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transform transition-transform hover:scale-105 shadow-xl hover:shadow-2xl">
+    <button class="bg-blue-200 text-blue-800 font-semibold py-3 px-8 mb-8 rounded-full hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transform transition-transform hover:scale-105 shadow-xl hover:shadow-2xl">
       See more
     </button>
   </div>
 </div>
+
 @endsection

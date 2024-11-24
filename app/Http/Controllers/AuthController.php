@@ -59,7 +59,7 @@ class AuthController extends Controller
         ]);
 
          // Đăng nhập người dùng ngay sau khi đăng ký thành công
-         auth()->login($user);
+         auth('web')->login($user);
 
          // Thông báo đăng ký thành công và chuyển hướng tới trang đăng nhập
          return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng đăng nhập!');
@@ -72,7 +72,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (auth()->attempt($credentials)) {
+        if (auth('web')->attempt($credentials)) {
             return redirect()->route('home');  // Chuyển hướng đến trang chủ sau khi đăng nhập
         }
 
@@ -84,7 +84,7 @@ class AuthController extends Controller
     // Đăng xuất người dùng
     public function logout()
     {
-        auth()->logout();  // Đăng xuất
+        auth('web')->logout();  // Đăng xuất
         return redirect()->route('login');  // Chuyển hướng đến trang đăng nhập
     }
 

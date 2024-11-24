@@ -7,6 +7,11 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Schedule;
+use Illuminate\Support\Facades\Schedule as TaskScheduler;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DoctorController;
+
 
 // Trang chủ và các trang chính
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -57,12 +62,14 @@ Route::get('/as1', function () {
 Route::get('/hcpc', function () {
     return view('pages.hcpc');
 })->name('hcpc');
-Route::get('/as', function () {
-    return view('pages.as');
-})->name('as');
-Route::get('/doctor', function () {
-    return view('pages.doctor');
-})->name('doctor');
+
+// Route::get('/doctor', function () {
+//     return view('pages.doctor');
+// })->name('doctor');
+
+Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'); // Hiển thị danh sách bác sĩ
+Route::get('/doctor/{id}', [DoctorController::class, 'showProfile'])->name('doctor.profile'); // Hiển thị hồ sơ bác sĩ
+
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -133,6 +140,16 @@ Route::post('/loginad', [AuthController::class, 'loginad']);
 // Route đăng xuất
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');  // Xử lý đăng xuất
 
+//appointment
+TaskScheduler::call(function () {
+    Schedule::query()->update(['updated_at' => now()]);
+})->everyMinute();
+
+Route::middleware(['auth'])->group(function () {
+    // Route hiển thị và lưu lịch hẹn
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('as.index');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('as.store');
+});
 
 
 
@@ -194,19 +211,19 @@ Route::delete('/admin/accounts/{id}', [AdminController::class, 'deleteAccount'])
 
 
 
-Route::get('/admin/products', [ProductController::class, 'index1'])->name('products.index'); 
+Route::get('/admin/products', [ProductController::class, 'index1'])->name('products.index');
 
 // Hiển thị form tạo mới sản phẩm
-Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create'); 
+Route::get('/admin/products/create', [ProductController::class, 'create'])->name('products.create');
 
 // Lưu sản phẩm mới
-Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store'); 
+Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
 
 // Hiển thị form chỉnh sửa sản phẩm
-Route::get('/admin/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit'); 
+Route::get('/admin/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
 // Cập nhật sản phẩm
-Route::put('/admin/products/{id}', [ProductController::class, 'update'])->name('products.update'); 
+Route::put('/admin/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
 // Xóa sản phẩm
 Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -233,8 +250,3 @@ Route::delete('/cart/remove/{productId}', [CartController::class, 'remove'])->na
 use App\Http\Controllers\UserController;
 
 Route::get('/profile/{id}', [UserController::class, 'show'])->name('user.profile');
-
-
-
-
-

@@ -35,9 +35,9 @@
                                 </ul>
                             </li>
                             <li class="relative detail-item">
-                                <a href="{{ route('as') }}" class="block px-4 py-2 text-black hover:bg-gray-200">Appointment schedule</a>
+                                <a href="{{ route('as.index') }}" class="block px-4 py-2 text-black hover:bg-gray-200">Appointment schedule</a>
                                 <ul class="detail-submenu">
-                                    <li><a href="{{ route('doctor') }}" class="block px-4 py-2 text-black hover:bg-gray-200">All doctor</a></li>
+                                    <li><a href="{{ route('doctors.index') }}" class="block px-4 py-2 text-black hover:bg-gray-200">All doctor</a></li>
                                     <li><a href="{{ route('address') }}" class="block px-4 py-2 text-black hover:bg-gray-200">Address</a></li>
                                 </ul>
                             </li>
