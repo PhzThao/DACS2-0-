@@ -7,10 +7,10 @@
         <div class="container mx-auto px-4 lg:px-8 relative z-10 h-full flex flex-col lg:flex-row items-center justify-between">
             <div class="text-center lg:text-left">
                 <h1 class="text-white text-4xl lg:text-5xl font-bold">{{ $doctor->name_doctor }}</h1>
-                <p class="text-blue-200 text-lg lg:text-xl mt-2">{{ $doctor->doctor_title }}</p>
-                <button class="mt-4 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-yellow-400 transition">
+                <p class="text-blue-200 text-lg lg:text-xl mt-2 mb-5">{{ $doctor->doctor_title }}</p>
+                <a href="{{ route('as.index', ['id_doctor' => $doctor->id_doctor])}}" class="mt-4 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full shadow-md hover:bg-yellow-400 transition">
                     Book now
-                </button>
+                </a>
             </div>
             <img src="{{ asset($doctor->doctor_avartar) }}" alt="Doctor's Image" class="w-32 h-32 lg:w-40 lg:h-40 rounded-full border-4 border-white shadow-lg mt-6 lg:mt-0">
         </div>

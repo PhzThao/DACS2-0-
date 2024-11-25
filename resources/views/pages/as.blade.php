@@ -70,10 +70,21 @@
     <h2 class="text-lg font-bold text-gray-700 mb-4">Book Now</h2>
     <div class="space-y-4">
         <!-- Select Doctor -->
-        <a href="{{ route('doctor') }}" class="block bg-blue-500 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+        <a href="{{ route('doctors.index') }}" class="block bg-blue-500 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition">
             Select Doctor
         </a>
 
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl mx-auto mt-8 mb-14">
+            <h2 class="text-lg font-bold text-gray-700 mb-4">Doctor Information</h2>
+            @if ($doctor)
+                <p><strong>Name:</strong> {{ $doctor->name }}</p>
+                <p class="text-sm text-gray-500"><span class="mr-1">💲</span>${{ $doctor->doctor_booking_price }}</p>
+            @else
+                <p class="text-red-500">No doctor selected. Please select a doctor before booking.</p>
+            @endif
+        </div>
+        
+        
         <!-- Select Address -->
         <a href="{{ route('address') }}" class="block bg-green-500 text-white text-center font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition">
             Your Address

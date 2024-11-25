@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pet Login Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -13,24 +14,21 @@
         <!-- Login Form Card -->
         <div class="bg-black/30 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
             @if (session('success'))
-    <script type="text/javascript">
-        alert("{{ session('success') }}");
-
-        // Đợi 1 giây (1000ms) trước khi chuyển hướng
-        setTimeout(function() {
-            window.location.href = "{{ route('login') }}";
-        }, 1000);  // Chuyển hướng sau 1 giây
-    1</script>
-    @endif
+                <script type="text/javascript">
+                    alert("{{ session('success') }}");
+                    // Đợi 1 giây (1000ms) trước khi chuyển hướng
+                    setTimeout(function() {
+                        window.location.href = "{{ route('login') }}";
+                    }, 1000);
+                </script>
+            @endif
             <form method="POST" action="{{ route('login') }}" class="space-y-6">
                 @csrf
                 <h2 class="text-5xl font-semibold text-white text-center mb-8">Login</h2>
                 
-                <!-- Username Field -->
+                <!-- Email Field -->
                 <div class="space-y-2">
-                    <label for="email" class="block text-sm font-medium text-gray-200">
-                        Email
-                    </label>
+                    <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
                     <input 
                         type="email" 
                         id="email" 
@@ -43,9 +41,7 @@
 
                 <!-- Password Field -->
                 <div class="space-y-2">
-                    <label for="password" class="block text-sm font-medium text-gray-200">
-                        Password
-                    </label>
+                    <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
                     <input 
                         type="password" 
                         id="password" 

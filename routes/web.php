@@ -63,14 +63,6 @@ Route::get('/hcpc', function () {
     return view('pages.hcpc');
 })->name('hcpc');
 
-// Route::get('/doctor', function () {
-//     return view('pages.doctor');
-// })->name('doctor');
-
-Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'); // Hiển thị danh sách bác sĩ
-Route::get('/doctor/{id}', [DoctorController::class, 'showProfile'])->name('doctor.profile'); // Hiển thị hồ sơ bác sĩ
-
-
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
@@ -145,13 +137,18 @@ TaskScheduler::call(function () {
     Schedule::query()->update(['updated_at' => now()]);
 })->everyMinute();
 
+// Route hiển thị và lưu lịch hẹn
 Route::middleware(['auth'])->group(function () {
-    // Route hiển thị và lưu lịch hẹn
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('as.index');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('as.store');
 });
 
+//Router nhận id_doctor để hiển thị trang appoinment
+Route::get('/appointment-schedule', [AppointmentController::class, 'schedule'])->name('appointment.schedule');
 
+Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'); // Hiển thị danh sách bác sĩ
+Route::get('/doctor/{id}', [DoctorController::class, 'showProfile'])->name('doctor.profile'); // Hiển thị hồ sơ bác sĩ
+Route::get('/book-now/{idDoctor}', [DoctorController::class, 'bookNow'])->name('book.now');
 
 
 // Route to display all products

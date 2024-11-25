@@ -11,7 +11,7 @@ class DoctorController extends Controller
     public function index()
     {
         // Lấy danh sách bác sĩ từ bảng doctor
-        $doctors = Doctor::all(); // Hoặc dùng DB::table('doctor')->get()
+        $doctors = Doctor::all();
 
         // Trả dữ liệu bác sĩ về view 'pages.doctor'
         return view('pages.doctor', compact('doctors'));
@@ -27,5 +27,21 @@ class DoctorController extends Controller
         }
 
         return view('pages.prodoctor', compact('doctor'));
+    }
+
+    // Lưu id_doctor vào session
+    public function bookNow($idDoctor)
+    {
+        $doctor = Doctor::find($idDoctor);
+
+        session(['id_doctor' => $idDoctor]);
+        echo $idDoctor;
+        if (session('id_doctor')) {
+            dd("Session id_doctor has been set to: " . session('id_doctor'));
+        } else {
+            dd("Failed to set session id_doctor.");
+        }
+
+        return redirect()->route('as.index');
     }
 }
